@@ -4,6 +4,7 @@ import Image
 import argparse
 import os
 import sys
+import crop_face
 
 parser = argparse.ArgumentParser(description='Convert images to approriate scale (360x260 rc)')
 parser.add_argument('-o',help='Output Directory')
@@ -51,8 +52,9 @@ if args.i:
   for fin in files:
     print(fin)
     imin = Image.open(args.FilePath + fin)
-    imout = imin.resize((width, height), Image.BILINEAR)
-    imout.save(args.o + str(fn) + ext)
+    crop_face.CropFace(imin, eye_left=(100,100), eye_right=(150,100), offset_pct=(0.2,0.2), dest_sz=(width,height)).save(args.o+ str(fn) + ext)
+#    imout = imin.resize((width, height), Image.BILINEAR)
+#    imout.save(args.o + str(fn) + ext)
     fn+=1
 else:
     imin = Image.open(files)
