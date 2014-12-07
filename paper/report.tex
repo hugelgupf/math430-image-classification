@@ -113,6 +113,7 @@ Math 430}
 \maketitle
 
 \section{Introduction}
+\label{sec:intro}
 
 In this project, we seeked to classify images of faces by gender using machine
 learning. This was based on a face database\cite{fei} from the Centro
@@ -121,7 +122,12 @@ aligned images. The algorithm developed on these images was then used on 1000
 images from the Labeled Faces in the Wild database out of the University of
 Massachusetts\cite{lfw}. 
 
+Two classification methods were used: a simple method based on the rank-2
+SVD approximation coefficients and an LDA na\"ive Bayes classifier. Both yielded
+fairly accurate results.
+
 \section{Model Description}
+\label{sec:model}
 
 Several methods of face classification were tried. First, singular values were
 obtained for both smiling and non-smiling images and it was clear that they were
@@ -134,10 +140,13 @@ This \lstinline[language=Matlab]{classify} function is based on Fisher's Linear
 Discriminant Analysis (LDA).
 
 \subsection{Na\"ive Classifier}
+\label{sec:model:naive}
 
 % talk about rank-2 right-singular vector classifier, 90% accuracy? -> get data
 
+
 \subsection{LDA Classifier} 
+\label{sec:model:lda}
 
 Using a training set, we create the matrix $M$ such that each column represents
 one image. We then calculate
@@ -155,31 +164,53 @@ conditionally independent, which means that the classifer is na\"ive Bayes
 % eigenfaces!
 
 \section{Data And Analysis}
+\label{sec:analysis}
+
+\subsection{Na\"ive Classifier}
+\label{sec:analysis:naive}
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+                      & \bfseries Male  & \bfseries Female  \\
+    \bfseries Male    & 45\%            & 5\%               \\
+    \bfseries Female  & 5\%             & 45\%              \\
+    \bottomrule
+  \end{tabular}
+  \caption{Results of image classification on FEI database with na\"ive
+  classifier}
+  \label{tab:naive}
+\end{table}
+
+\subsection{LDA Classifier}
+\label{sec:analysis:lda}
+
+See data in Appendix~\ref{sec:app:data}.
 
 % talk about FEI database results
 % non-smiling -> smiling esp (rank-k approximation will look different because smiling, duh)
 % mean faces for both FEI and LFW separately
 % talk about LFW results, why not as accurate (not centered, mean image)
 
-% graphs: accuracy vs k for LFW, same for FEI (I will generate better graphs
-% than we have at the moment.)
-
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{accuracy_k.png}
-  \caption{Accuracy vs number of coefficients used for FEI database}
+  \caption{Accuracy vs number of coefficients used for FEI database when using
+  50 images.}
   \label{fig:data:accuracy_fei}
 \end{figure}
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{accuracy_k_lfw.png}
-  \caption{Accuracy vs number of coefficients used for Labeled Faces in the Wild}
+  \caption{Accuracy vs number of coefficients used for Labeled Faces in the
+  Wild database.}
   \label{fig:data:accuracy_lfw}
 \end{figure}
 
-
 \section{Conclusion}
+\label{sec:conclusion}
 
 A na\"ive Bayes classification system such as MATLAB's
 \lstinline[language=Matlab]!classify! based on LDA is decent for classifying
@@ -188,7 +219,7 @@ images is used. It seems plausible that such a classifier could also be used to
 distinguish other physical characteristics and shapes. 
 
 Even though the images in the Labeled Faces in the Wild were not all from the
-same angle, the classifier still achieved up to 87.5\% accuracy when enough
+same angle, the classifier still achieved up to 85.5\% accuracy when enough
 coefficients were used. 
 
 % talk about some future work.
@@ -206,7 +237,6 @@ coefficients were used.
   \lstinputlisting[style=c,language=Matlab]{../classifyImages.m}
 
   \subsection{Image Resizing}
-
   \subsubsection{crop\_face.py}
   \lstinputlisting[style=c,language=Python]{../crop_face.py}
 
@@ -223,7 +253,7 @@ coefficients were used.
       ID as F & Accuracy \\
       \midrule
       \midrule
-      \multirow{3}{6em}{Non-smiling / Non-smiling (RGB)} 
+      \multirow{3}{6em}{FEI Non-smiling / non-smiling (RGB)} 
                                 & 5   & 5   & 39\%  & 38\%  & 61\% \\
                                 & 10  & 10  & 26\%  & 21\%  & 75\% \\
                                 & 15  & 15  & 19\%  & 15\%  & 81\% \\
@@ -234,7 +264,7 @@ coefficients were used.
                                 & 50  & 25  & 12\%  & 13\%  & 88\% \\
                                 & 50  & 50  & 8\%   & 10\%  & \bfseries 90\% \\
       \midrule
-      \multirow{3}{6em}{Non-smiling / Smiling (RGB)} 
+      \multirow{3}{6em}{FEI Non-smiling / smiling (RGB)} 
                                 & 5   & 5   & 15\%  & 22\%  & 80\% \\
                                 & 10  & 10  & 17\%  & 16\%  & 81\% \\
                                 & 15  & 15  & 13\%  & 14\%  & 86\% \\
@@ -245,7 +275,7 @@ coefficients were used.
                                 & 50  & 25  & 11\%  & 11\%  & 89\% \\
                                 & 50  & 50  & 11\%  & 9\%   & \bfseries 90\% \\
       \midrule
-      \multirow{3}{6em}{Non-smiling, cropped / Non-smiling, cropped (Gray)} 
+      \multirow{3}{6em}{FEI Non-smiling / non-smiling (cropped, gray)} 
                                 & 5   & 5   & 33\%  & 35\%  & 66\% \\
                                 & 10  & 10  & 23\%  & 32\%  & 77\% \\
                                 & 15  & 15  & 20\%  & 20\%  & 80\% \\
@@ -256,7 +286,7 @@ coefficients were used.
                                 & 50  & 25  & 10\%  & 11\%  & 89\% \\
                                 & 50  & 50  & 7\%   & 9\%   & \bfseries 92\% \\
       \midrule
-      \multirow{3}{6em}{Non-smiling, cropped / Smiling, cropped (Gray)} 
+      \multirow{3}{6em}{FEI Non-smiling / smiling (cropped, gray)} 
                                 & 5   & 5   & 44\%  & 32\%  & 52\% \\
                                 & 10  & 10  & 37\%  & 17\%  & 62\% \\
                                 & 15  & 15  & 38\%  & 13\%  & 62\% \\
@@ -267,7 +297,7 @@ coefficients were used.
                                 & 50  & 25  & 33\%  & 8\%   & 72\% \\
                                 & 50  & 50  & 30\%  & 12\%  & \bfseries 72\% \\
       \midrule
-      \multirow{3}{6em}{Labeled Faces in the Wild, cropped}
+      \multirow{3}{6em}{Labeled Faces in the Wild (cropped, gray)}
                                 & 250 & 5   & 34.6\%  & 43.6\%  & 63.2\% \\
                                 & 250 & 10  & 27.1\%  & 43.1\%  & 69\% \\
                                 & 250 & 15  & 26.2\%  & 38.8\%  & 70.7\% \\
