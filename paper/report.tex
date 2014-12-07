@@ -182,8 +182,31 @@ conditionally independent, which means that the classifer is na\"ive Bayes
 \section{Data And Analysis}
 \label{sec:analysis}
 
+In the following section, we present results of our methods used on the FEI
+database and the LFW database. It is worth noting that there are 100 males and
+100 females in the FEI database, while we used 758 males and 243 females from
+the LFW database.
+
 \subsection{Na\"ive Classifier}
 \label{sec:analysis:naive}
+
+The na\"ive classifier was only used on the FEI database, on which it yielded
+reasonable results. However, we do not believe it to be useful for other images.
+
+The na\"ive classifier was 90\% accurate for the 200 images in the FEI database
+and yielded a symmetry of 5\% false identification for both males and females
+coincidentally, as seen in Table~\ref{tab:analysis:naive:data}. Looking at the
+mean face in Figure~\ref{fig:analysis:naive:mean} for both
+male and female faces shows fairly clearly how this classification works
+intuitively: Female faces tend to have darker spots next to their necks due to
+hair, while male faces have lighter spots. This intuition is confirmed by seeing
+that most of the misclassifications are males with long hair and females with
+short hair. There are cases in which a misclassification is for another reason,
+but the intuition works in most cases.
+
+Because all the faces are seen from a straight angle, we believe that this
+classification scheme merely coincidentally worked on the FEI database and would
+not work in general.
 
 \begin{table}[!ht]
   \centering
@@ -196,11 +219,29 @@ conditionally independent, which means that the classifer is na\"ive Bayes
   \end{tabular}
   \caption{Results of image classification on FEI database with na\"ive
   classifier}
-  \label{tab:naive}
+  \label{tab:analysis:naive:data}
 \end{table}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fei_mean_face_mf.png}
+  \caption{FEI Mean face: female on left and male on right.}
+  \label{fig:analysis:naive:mean}
+\end{figure}
 
 \subsection{LDA Classifier}
 \label{sec:analysis:lda}
+
+The LDA classifier performed fairly well when a non-smiling training set was
+used on the FEI database. For three cases, its accuracy was 90\% or better; only
+the case in which we used gray cropped images and a smiling set was classified
+did it perform with 72\% accuracy. This is very likely a result of our method
+used: considering the rank-$k$ SVD as a rank-$k$ approximation to the faces, we
+note that the difference in images for cropped, gray-scale non-smiling to
+cropped, gray-scale smiling is rather large: a smile is now a significant
+portion of the face and also much lighter than a non-smiling image in that area.
+It stands to reason that feature extraction of the mouth area and usage of the
+LDA classifier would also be a good smiling vs non-smiling classifier.
 
 See data in Appendix~\ref{sec:app:data}.
 
@@ -225,6 +266,7 @@ See data in Appendix~\ref{sec:app:data}.
   \label{fig:data:accuracy_lfw}
 \end{figure}
 
+\clearpage
 \section{Conclusion}
 \label{sec:conclusion}
 
