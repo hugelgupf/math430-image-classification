@@ -3,7 +3,7 @@
 % Math 415 Project 4
 % Christopher K., Darrel B.
 function [meanVals, stdVals, vals] = classifyImages(MCmax)
-  img = rgb2gray(imread('1a.jpg'));
+  img = rgb2gray(imread('images/1a.jpg'));
   [m,n] = size(img);
   gender=load('gender.txt');
   nimg = 200;
@@ -18,10 +18,10 @@ function [meanVals, stdVals, vals] = classifyImages(MCmax)
   allImgs = zeros(m*n,nimg);
   allSmile = zeros(m*n,nimg);
   for i = 1:nimg
-    filename = sprintf('%da.jpg',i);
+    filename = sprintf('images/%da.jpg',i);
     img = rgb2gray(imread(filename));
     allImgs(:,i) = img(:);
-    filename = sprintf('%db.jpg',i);
+    filename = sprintf('images/%db.jpg',i);
     img = rgb2gray(imread(filename));
     allSmile(:,i) = img(:);
   end
@@ -90,7 +90,7 @@ function [meanVals, stdVals, vals] = classifyImages(MCmax)
     smileV = S\(U\allSmile);
     randV = S\(U\randImg);
     %% Nonsmiling to nonsmiling
-    [allCl] = classify(allV(1:nK,:)',[V(:,1:nK);randV(1:nK)'],[trainGend;0],'diaglinear');
+    [allCl] = classify(allV(1:nK,:)', [V(:,1:nK); randV(1:nK)'], [trainGend;0], 'diaglinear');
     diff = allCl - gender;
     MasM = sum(diff(gender==1)==0);
     MasF = sum(diff(gender==1)~=0);

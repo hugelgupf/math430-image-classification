@@ -139,11 +139,20 @@ Discriminant Analysis (LDA).
 
 \subsection{LDA Classifier} 
 
+Using a training set, we create the matrix $M$ such that each column represents
+one image. We then calculate
+\[ \left[ U, S, V \right] = \mathrm{svd}(M) \]
+and obtain the $V$ coefficients of the remaining data set $M^*$ using
+\[ V^* = S \backslash (U \backslash M^*). \]
+
+We then use MATLAB's \lstinline[language=Matlab]!classify! function, which is
+based on Fisher's linear discriminant analysis \cite{classify}. Because we used
+the ``diaglinear'' setting, this is a na\"ive Bayes classifier. The setting
+means that the covariance matrix was diagonal and thus the input variables are
+conditionally independent, which means that the classifer is na\"ive Bayes
+\cite{nbayes}.
+
 % eigenfaces!
-% explain what naive bayes is, cite (JM, TC)
-% how lda works (maybe? is that necessary?)
-% citation for LDA -- maybe fisher's paper
-% matlab's classify
 
 \section{Data And Analysis}
 
@@ -154,6 +163,21 @@ Discriminant Analysis (LDA).
 
 % graphs: accuracy vs k for LFW, same for FEI (I will generate better graphs
 % than we have at the moment.)
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{accuracy_k.png}
+  \caption{Accuracy vs number of coefficients used for FEI database}
+  \label{fig:data:accuracy_fei}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{accuracy_k_lfw.png}
+  \caption{Accuracy vs number of coefficients used for Labeled Faces in the Wild}
+  \label{fig:data:accuracy_lfw}
+\end{figure}
+
 
 \section{Conclusion}
 
@@ -182,6 +206,11 @@ coefficients were used.
   \lstinputlisting[style=c,language=Matlab]{../classifyImages.m}
 
   \subsection{Image Resizing}
+
+  \subsubsection{crop\_face.py}
+  \lstinputlisting[style=c,language=Python]{../crop_face.py}
+
+  \subsubsection{imsize.py}
   \lstinputlisting[style=c,language=Python]{../imsize.py}
 
   \pagebreak
