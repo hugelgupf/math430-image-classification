@@ -137,14 +137,30 @@ males and females easily in a very na\"ive way. Finally, we used MATLAB's
 \lstinline[language=Matlab]{classify} function with the $k$th-rank
 right-singular vector of a training set to classify faces into male and female.
 This \lstinline[language=Matlab]{classify} function is based on Fisher's Linear
-Discriminant Analysis (LDA).
+Discriminant Analysis (LDA) and due to the setting used also a na\"ive Bayes
+classifier.
 
 \subsection{Na\"ive Classifier}
 \label{sec:model:naive}
 
 % talk about rank-2 right-singular vector classifier, 90% accuracy? -> get data
 
+Given that $V$ is the right-singular vector of the SVD on all images of the FEI
+database, Figure~\ref{fig:model:naive:part} shows the $V$-coefficients for the
+$k$th column. We can easily see that for $k = 2$, male faces (red) seem to
+roughly have coefficients above 0, while female faces (black) seem to roughly
+have coefficients below 0. We tried to use this partitioning approach for
+classifying all the FEI database images by gender. The results can be seen in
+Section~\ref{sec:analysis:naive}.
 
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{naive_classifier_k_partition.png}
+  \caption{Simple Partitioning: red is male, black is female}
+  \label{fig:model:naive:part}
+\end{figure}
+
+\pagebreak
 \subsection{LDA Classifier} 
 \label{sec:model:lda}
 
@@ -307,7 +323,8 @@ coefficients were used.
                                 & 250 & 90  & 8.8\%   & 30.7\%  & \bfseries 85.5\% \\
                                 & 250 & 100 & 9\%     & 31.7\%  & 85.1\% \\
       \bottomrule
-    \caption{Results}
+    \caption{Results. Note that there were 758 males and 243 females in the LFW
+    database, while there were 100 males and 100 females in the FEI database.}
     \label{tab:data}
   \end{longtable}
 
