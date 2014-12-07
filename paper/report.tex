@@ -170,12 +170,20 @@ one image. We then calculate
 and obtain the $V$ coefficients of the remaining data set $M^*$ using
 \[ V^* = S \backslash (U \backslash M^*). \]
 
-We then use MATLAB's \lstinline[language=Matlab]!classify! function, which is
+We did not use all the coefficients in the $V$ matrix, we only used the first
+$k$, where $k$ was varied between $5$ and $100$.
+
+We then use MATLAB's \lstinline[language=Matlab]!classify! function on the first
+$k$ $V$ values, which is
 based on Fisher's linear discriminant analysis \cite{classify}. Because we used
 the ``diaglinear'' setting, this is a na\"ive Bayes classifier. The setting
 means that the covariance matrix was diagonal and thus the input variables are
 conditionally independent, which means that the classifer is na\"ive Bayes
 \cite{nbayes}.
+
+For each $k$ value, obtaining classification data was repeated 10 times each
+with a different scrambled training set. The accuracies shown in the data
+section are an average of these 10 trials.
 
 % eigenfaces!
 
