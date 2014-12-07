@@ -167,6 +167,8 @@ Even though the images in the Labeled Faces in the Wild were not all from the
 same angle, the classifier still achieved up to 87.5\% accuracy when enough
 coefficients were used. 
 
+% talk about some future work.
+
 % TODO: 3d surface of k vs training size vs accuracy? -> sunday morning,
 % possibly
 % TODO: FEI as training set on LFW? -> sunday morning
@@ -176,9 +178,11 @@ coefficients were used.
   \section{Code}
   \label{sec:app:code}
 
+  \subsection{Classification Algorithm}
   \lstinputlisting[style=c,language=Matlab]{../classifyImages.m}
 
- % \lstinputlisting[style=c,language=Python]{crop_face.py}
+  \subsection{Image Resizing}
+  \lstinputlisting[style=c,language=Python]{../imsize.py}
 
   \pagebreak
   \section{Data}
