@@ -233,7 +233,7 @@ not work in general.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.7\textwidth]{fei_mean_face_mf.png}
-  \caption{FEI Mean face: female on left and male on right.}
+  \caption{FEI mean faces: female on left and male on right.}
   \label{fig:analysis:naive:mean}
 \end{figure}
 
@@ -253,6 +253,15 @@ LDA classifier would also be a good smiling vs non-smiling classifier.
 
 See data in Appendix~\ref{sec:app:data}.
 
+\begin{figure}[!ht]
+  \centering
+  \includegraphics{avg.jpg}
+  \caption{LFW mean faces: from left to right; both genders, male, female. Each
+  group of three features the red-channel, green-channel, and blue-channel mean
+  face.}
+  \label{fig:analysis:lda:mean}
+\end{figure}
+
 % talk about FEI database results
 % non-smiling -> smiling esp (rank-k approximation will look different because smiling, duh)
 % mean faces for both FEI and LFW separately
@@ -263,7 +272,7 @@ See data in Appendix~\ref{sec:app:data}.
   \includegraphics[width=0.8\textwidth]{accuracy_k.png}
   \caption{Accuracy vs number of coefficients used for FEI database when using
   50 images.}
-  \label{fig:data:accuracy_fei}
+  \label{fig:analysis:lda:accuracy_fei}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -271,7 +280,7 @@ See data in Appendix~\ref{sec:app:data}.
   \includegraphics[width=0.8\textwidth]{accuracy_k_lfw.png}
   \caption{Accuracy vs number of coefficients used for Labeled Faces in the
   Wild database.}
-  \label{fig:data:accuracy_lfw}
+  \label{fig:analysis:lda:accuracy_lfw}
 \end{figure}
 
 \clearpage
@@ -381,7 +390,9 @@ coefficients were used.
 \end{appendices}
 
 \pagebreak
-\bibliography{IEEEabrv,proj4}
-\bibliographystyle{IEEEtran}
+%\bibliography{IEEEabrv,proj4}
+%\bibliographystyle{IEEEtran}
+\bibliographystyle{amsplain}
+\bibliography{proj4}
 
 \end{document}
