@@ -165,7 +165,10 @@ and obtain the $V$ coefficients of the remaining data set $M^*$ using
 \[ V^* = S \backslash (U \backslash M^*). \]
 
 We did not use all the coefficients in the $V$ matrix, we only used the first
-$k$, where $k$ was varied between $5$ and $100$.
+$k$, where $k$ was varied between $5$ and $100$. Performing SVD in this case is
+analogous to performing PCA; the first $k$ columns of $V$ are the principal
+components of $M$. This is also analogous to finding the $k$ ``most important''
+eigenfaces.
 
 We then used MATLAB's \lstinline[language=Matlab]!classify! function, which is
 based on Fisher's linear discriminant analysis \cite{classify}. The first $k$
@@ -180,7 +183,6 @@ For each $k$ value and training set size, obtaining classification data was
 repeated 10 times each with a differently scrambled training set. The accuracies
 and false ID percentages shown in the data section are an average of these 10
 trials.
-
 
 \pagebreak
 \section{Data And Analysis}
@@ -202,11 +204,11 @@ and yielded a symmetry of 5\% false identification for both males and females
 coincidentally, as seen in Table~\ref{tab:analysis:naive:data}. Looking at the
 mean face in Figure~\ref{fig:analysis:naive:mean} for both
 male and female faces shows fairly clearly how this classification works
-intuitively: Female faces tend to have darker spots next to their necks due to
-hair, while male faces have lighter spots. This intuition is confirmed by seeing
-that most of the misclassifications are males with long hair and females with
-short hair. There are cases in which a misclassification is for another reason,
-but the intuition works in most cases.
+intuitively: Female faces tend to have darker sections next to their necks due to
+hair, while male faces have lighter sections. This intuition is confirmed by
+seeing that most of the misclassifications are males with long hair and females
+with short hair. There are cases in which a misclassification is for another
+reason, but the intuition works in most cases.
 
 Because all the faces are seen from a straight angle, we believe that this
 classification scheme merely coincidentally worked on the FEI database and would
@@ -265,8 +267,8 @@ number of training images, but in each case the accuracy is lower than for $k =
 50$ with $50$ training images.
 
 For the LFW database, it seems that the highest accuracy we can achieve is about
-85.5\%. We used $250$ training images out of a total of $1001$ images and let
-$k$ range from $5$ to $100$. Figure~\ref{fig:analysis:lda:mean} shows the mean
+85.5\% using $250$ training images out of a total of $1001$ images, where $k$
+ranges from $5$ to $100$. Figure~\ref{fig:analysis:lda:mean} shows the mean
 faces for all images, male, and female for each color channel (RGB). We notice
 that it is hard to tell them apart even for a human and no easy distinction can
 be made by looking at the picture as with the na\"ive classifier in
