@@ -56,7 +56,6 @@
   numberfirstline,
   numberstyle=\scriptsize, %\sffamily
   frame=single, 
-  frameround=tttt,
   tabsize=4,
   basicstyle=\small\ttfamily, 
   keywordstyle=\bfseries\color{dkpurple},
@@ -64,7 +63,7 @@
   commentstyle=\color{dkgreen}, 
   showstringspaces=false,
   aboveskip=0.5em, 
-  belowskip=0em,
+  belowskip=0.5em,
   captionpos=b,
   xleftmargin=1.5em,
   xrightmargin=0.5em
@@ -116,8 +115,8 @@ aligned images. The algorithm developed on these images was then used on 1000
 images from the Labeled Faces in the Wild database out of the University of
 Massachusetts\cite{lfw}. 
 
-Two classification methods were used: a simple method based on the rank-2
-SVD approximation coefficients and an LDA na\"ive Bayes classifier. Both yielded
+Two classification methods were used: a simple method based on the second
+eigenface coefficients and an LDA na\"ive Bayes classifier. Both yielded
 fairly accurate results.
 
 \section{Model Description}
