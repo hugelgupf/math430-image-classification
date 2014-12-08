@@ -141,16 +141,17 @@ classifier.
 
 Given that $V$ is the right-singular vector of the SVD on all images of the FEI
 database, Figure~\ref{fig:model:naive:part} shows the $V$-coefficients for the
-$k$th column. We can easily see that for $k = 2$, male faces (red) seem to
-roughly have coefficients above 0, while female faces (black) seem to roughly
-have coefficients below 0. We tried to use this partitioning approach for
-classifying all the FEI database images by gender. The results can be seen in
-Section~\ref{sec:analysis:naive}.
+$k$th column. We can easily see that for $k = 2$ (the second eigenface), male
+faces (red) seem to roughly have coefficients above 0, while female faces
+(black) seem to roughly have coefficients below 0. We tried to use this
+partitioning approach for classifying all the FEI database images by gender. The
+results can be seen in Section~\ref{sec:analysis:naive}.
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.7\textwidth]{naive_classifier_k_partition.png}
-  \caption{Simple Partitioning: red is male, black is female}
+  \caption{Simple partitioning: red is male, black is female. Graph is showing
+  coefficients for the first 20 eigenfaces.}
   \label{fig:model:naive:part}
 \end{figure}
 
@@ -300,7 +301,7 @@ See all raw data in Appendix~\ref{sec:app:data}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{accuracy_k_lfw.png}
+  \includegraphics[width=0.75\textwidth]{accuracy_k_lfw.png}
   \caption{Accuracy vs number of coefficients used for Labeled Faces in the
   Wild database.}
   \label{fig:analysis:lda:accuracy_lfw}
@@ -330,8 +331,9 @@ eyes, mouth shape?) to try to improve the accuracy of the method. To figure out
 which features are important, we would have to take a look at the classification
 algorithm currently used (LDA) and collect statistics on which eigenfaces are
 most important in determining gender in order to look at their most
-distinguishing features each. 
-We would also liked to have looked at mixing the databases used.
+distinguishing features each. Due to the results of the na\"ive classifier, it
+seems that looking at the second eigenface would be important. 
+We also would have liked to look at mixing the face databases we used.
 
 \pagebreak
 \begin{appendices}
