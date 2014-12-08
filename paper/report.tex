@@ -315,15 +315,23 @@ gender in both non-smiling and smiling images when a training set of non-smiling
 images is used. It seems plausible that such a classifier could also be used to
 distinguish other physical characteristics and shapes. 
 
-Even though the images in the Labeled Faces in the Wild were not all from the
-same angle, the classifier still achieved up to 85.5\% accuracy when enough
-coefficients were used. 
+Even though the images in the Labeled Faces in the Wild were not all taken from
+the same angle, the classifier still achieved up to 85.5\% accuracy when enough
+coefficients were used. However, this is likely due to the proportion of males
+to females in the LFW data, resulting in a lower accuracy for females.
 
-% talk about some future work.
+\subsection{Future Work}
+\label{sec:conclusion:future}
 
-% TODO: 3d surface of k vs training size vs accuracy? -> sunday morning,
-% possibly
-% TODO: FEI as training set on LFW? -> sunday morning
+Future work on this project could include exploring more sophisticated
+classification techniques and whether they turn out to be better than a na\"ive
+Bayes classifier. We could also perform some feature extraction (cheek bones,
+eyes, mouth shape?) to try to improve the accuracy of the method. To figure out
+which features are important, we would have to take a look at the classification
+algorithm currently used (LDA) and collect statistics on which eigenfaces are
+most important in determining gender in order to look at their most
+distinguishing features each. 
+We would also liked to have looked at mixing the databases used.
 
 \pagebreak
 \begin{appendices}
