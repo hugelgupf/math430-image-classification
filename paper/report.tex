@@ -216,19 +216,18 @@ classification scheme merely coincidentally worked on the FEI database and would
 not work in general.
 
 \begin{table}[!ht]
-  \vspace{20pt}
   \centering
-  \begin{tabular}{lll}
+  \begin{tabular}{llll}
     \toprule
-                      & \bfseries Male  & \bfseries Female  \\
-    \bfseries Male    & 45\%            & 5\%               \\
-    \bfseries Female  & 5\%             & 45\%              \\
+                  &                   & \textit{Predicted} \\
+                  &                   & \bfseries Male  & \bfseries Female  \\
+    \textit{Real} & \bfseries Male    & 45\%            & 5\%               \\
+                  & \bfseries Female  & 5\%             & 45\%              \\
     \bottomrule
   \end{tabular}
   \caption{Results of image classification on FEI database with na\"ive
   classifier}
   \label{tab:analysis:naive:data}
-  \vspace{20pt}
 \end{table}
 
 \begin{figure}[!ht]
