@@ -2,6 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{mathpazo}
+\usepackage{nicefrac}
 \usepackage[title,titletoc,toc]{appendix}
 \usepackage{multirow}
 % for much better looking tables
@@ -23,15 +24,8 @@
 %%% MISC
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext}
-\usepackage{color}
 \usepackage{cleveref}
 \usepackage[hidelinks,bookmarks]{hyperref}
-
-% for better arrays (eg matrices) in maths
-\usepackage{array} 
-\usepackage{verbatim}
-% nice enumerations
-\usepackage{paralist} 
 
 \usepackage{listings} % All code (looks nicer...)
 \usepackage{xcolor,color}
@@ -173,20 +167,22 @@ and obtain the $V$ coefficients of the remaining data set $M^*$ using
 We did not use all the coefficients in the $V$ matrix, we only used the first
 $k$, where $k$ was varied between $5$ and $100$.
 
-We then use MATLAB's \lstinline[language=Matlab]!classify! function on the first
-$k$ $V$ values, which is based on Fisher's linear discriminant analysis
-\cite{classify}. Because we used the ``diaglinear'' setting, this is a na\"ive
-Bayes classifier. The setting means that the covariance matrix was diagonal and
-thus the input variables are conditionally independent, which means that the
-classifer is na\"ive Bayes \cite{nbayes}.
+We then used MATLAB's \lstinline[language=Matlab]!classify! function, which is
+based on Fisher's linear discriminant analysis \cite{classify}. The first $k$
+coefficients of $V$ were used as the training set and the first $k$ coefficients
+of $V^*$ were to be classified. Because we used the ``diaglinear'' setting,
+MATLAB's \lstinline[language=Matlab]!classify! is a na\"ive Bayes classifier.
+The setting means that the covariance matrix was diagonal and thus the input
+variables are conditionally independent, which means that the classifer is
+na\"ive Bayes \cite{nbayes}.
 
 For each $k$ value and training set size, obtaining classification data was
 repeated 10 times each with a differently scrambled training set. The accuracies
 and false ID percentages shown in the data section are an average of these 10
 trials.
 
-% eigenfaces!
 
+\pagebreak
 \section{Data And Analysis}
 \label{sec:analysis}
 
@@ -217,6 +213,7 @@ classification scheme merely coincidentally worked on the FEI database and would
 not work in general.
 
 \begin{table}[!ht]
+  \vspace{20pt}
   \centering
   \begin{tabular}{lll}
     \toprule
@@ -228,6 +225,7 @@ not work in general.
   \caption{Results of image classification on FEI database with na\"ive
   classifier}
   \label{tab:analysis:naive:data}
+  \vspace{20pt}
 \end{table}
 
 \begin{figure}[!ht]
@@ -251,6 +249,14 @@ portion of the face and also much lighter than a non-smiling image in that area.
 It stands to reason that feature extraction of the mouth area and usage of the
 LDA classifier would also be a good smiling vs non-smiling classifier.
 
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{accuracy_k.png}
+  \caption{Accuracy vs number of coefficients used for FEI database when using
+  50 images.}
+  \label{fig:analysis:lda:accuracy_fei}
+\end{figure}
+
 Our data suggests that for the FEI database, $k = 50$ is the optimal number of
 coefficients when using $50$ training images as seen in
 Figure~\ref{fig:analysis:lda:accuracy_fei}. Appendix~\ref{sec:app:data} also
@@ -259,31 +265,36 @@ number of training images, but in each case the accuracy is lower than for $k =
 50$ with $50$ training images.
 
 For the LFW database, it seems that the highest accuracy we can achieve is about
-85.5\%.
-
-See all raw data in Appendix~\ref{sec:app:data}.
+85.5\%. We used $250$ training images out of a total of $1001$ images and let
+$k$ range from $5$ to $100$. Figure~\ref{fig:analysis:lda:mean} shows the mean
+faces for all images, male, and female for each color channel (RGB). We notice
+that it is hard to tell them apart even for a human and no easy distinction can
+be made by looking at the picture as with the na\"ive classifier in
+Section~\ref{sec:analysis:naive}. 
 
 \begin{figure}[!ht]
   \centering
   \includegraphics{avg.jpg}
   \caption{LFW mean faces: from left to right; both genders, male, female. Each
   group of three features the red-channel, green-channel, and blue-channel mean
-  face.}
+  face. (Axis labels seen are width and height in pixels.)}
   \label{fig:analysis:lda:mean}
 \end{figure}
 
-% talk about FEI database results
-% non-smiling -> smiling esp (rank-k approximation will look different because smiling, duh)
-% mean faces for both FEI and LFW separately
-% talk about LFW results, why not as accurate (not centered, mean image)
+It is to note for the LFW database that the
+pictures contained faces at all different angles. This is likely why the mean
+faces in Figure~\ref{fig:analysis:lda:mean} look much wider than the average
+faces of the FEI database as seen in Figure~\ref{fig:analysis:naive:mean}. This
+may also be the reason for the lower overall accuracy. However, if we observe
+the accuracy for each gender in Figure~\ref{fig:analysis:lda:accuracy_lfw}, we
+note that the female accuracy is much lower than the male accuracy. This is
+likely due to the fact that out of $1001$ faces, $758$ were male and $243$ were
+female. This means that the training sets likely each had only about
+$\nicefrac{1}{4}$ females, which would make it harder to classify female images
+accurately. Given an equal amount of male and female images, we hypothesize that
+the accuracy of the method on LFW would be similar to the accuracy on FEI.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.8\textwidth]{accuracy_k.png}
-  \caption{Accuracy vs number of coefficients used for FEI database when using
-  50 images.}
-  \label{fig:analysis:lda:accuracy_fei}
-\end{figure}
+See all raw data in Appendix~\ref{sec:app:data}.
 
 \begin{figure}[!ht]
   \centering
@@ -293,7 +304,6 @@ See all raw data in Appendix~\ref{sec:app:data}.
   \label{fig:analysis:lda:accuracy_lfw}
 \end{figure}
 
-\clearpage
 \section{Conclusion}
 \label{sec:conclusion}
 
